@@ -29,7 +29,7 @@ class AuthService extends BaseService
 
             event(new SendOTPEvent($this->model, $this->getAttr('otp_code')));
 
-            return response()->json(['message' => 'OTP sent to your email']);
+            return response()->json(['status' => true, 'message' => 'OTP sent to your email']);
         }
 
         return response()->json(['error' => 'Invalid credentials'], 401);
@@ -64,20 +64,14 @@ class AuthService extends BaseService
     {
         return response()->json(['success'=> true, 'token' => $token, 'status' => 'New'], 200);
     }
+
     public function signup(): JsonResponse
     {
-        $user = User::query()->create([
-            'name' => $this->getAttr('name'),
-            'email' => $this->getAttr('email'),
-            'password' => bcrypt($this->getAttr('password'))
-        ]);
-
-        $token = JWTAuth::fromUser($user);
+        $this->model = parent::save($this->getAttrs());
 
         return response()->json([
             'status' => true,
             'message' => 'User Registered Successfully',
-            'token' => $token
         ], 200);
     }
 

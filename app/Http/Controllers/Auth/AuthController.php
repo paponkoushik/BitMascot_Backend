@@ -36,7 +36,9 @@ class AuthController extends Controller
     {
         return $this
             ->service
-            ->setAttrs($request->only('name', 'email', 'password'))
+            ->setAttrs(
+                $request->only('first_name', 'last_name', 'email', 'password', 'address', 'phone', 'date_of_birth', 'id_verification')
+            )
             ->signup();
     }
     public function refresh(): JsonResponse

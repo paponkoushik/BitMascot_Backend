@@ -11,22 +11,26 @@ class UserSeeder extends Seeder
     public function run() {
         User::query()->insert([
             [
-                'name' => 'Koushik',
+                'first_name' => 'koushik',
+                'last_name' => 'balo',
                 'email' => 'koushik@gmail.com',
-                'email_verified_at' => now(),
-                'password' => Hash::make('123456'),
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'name' => 'Papon',
-                'email' => 'Papon@gmail.com',
-                'email_verified_at' => now(),
+                'date_of_birth' => '1995-06-01',
                 'password' => Hash::make('123456'),
                 'is_admin' => true,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
+            [
+                'first_name' => 'papon',
+                'last_name' => 'koushik',
+                'email' => 'papon@gmail.com',
+                'date_of_birth' => '1995-06-01',
+                'password' => Hash::make('123456'),
+                'is_admin' => false,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
         ]);
+
     }
 }
