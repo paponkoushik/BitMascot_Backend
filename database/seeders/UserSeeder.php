@@ -23,6 +23,7 @@ class UserSeeder extends Seeder
                 'email' => 'Papon@gmail.com',
                 'email_verified_at' => now(),
                 'password' => Hash::make('123456'),
+                'is_admin' => true,
                 'created_at' => now(),
                 'updated_at' => now()
             ],

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -17,8 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/storage', function () {
-    Artisan::call('migrate:fresh --force --seed');
 
-    Artisan::call('storage:link');
-});
+Route::get('test', [UserController::class, 'index'])
+    ->name('index');

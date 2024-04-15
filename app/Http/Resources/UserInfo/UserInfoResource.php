@@ -13,7 +13,7 @@ class UserInfoResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'user_type' => $this->user_type,
+            'is_admin' => $this->is_admin,
             'created_at' => $this->created_at?->format('F Y'),
         ];
     }

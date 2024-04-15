@@ -22,7 +22,7 @@ class ItemController extends Controller
     {
         $item = Item::query()
             ->with('inventory')
-            ->where('user_id', auth()->user()->id)
+//            ->where('user_id', auth()->user()->id)
             ->paginate(10);
 
         return response()->json($item, 200);

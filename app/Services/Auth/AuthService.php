@@ -2,6 +2,7 @@
 
 namespace App\Services\Auth;
 
+use App\Events\SendOTPEvent;
 use App\Models\User;
 use App\Services\BaseService;
 use Carbon\Carbon;
@@ -26,12 +27,9 @@ class AuthService extends BaseService
             ]);
             $this->model->fill($this->getAttrs())->save();
 
-            event(new SendOTPEvent($user, $otp));
+            event(new SendOTPEvent($this->model, $this->getAttr('otp_code')));
 
             return response()->json(['message' => 'OTP sent to your email']);
-
-            $token = JWTAuth::fromUser(Auth::user());
-            return response()->json(compact('token'));
         }
 
         return response()->json(['error' => 'Invalid credentials'], 401);

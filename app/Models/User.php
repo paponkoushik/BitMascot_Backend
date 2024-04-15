@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Filters\BaseFilter;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -19,6 +21,7 @@ class User extends Authenticatable implements JWTSubject
         'password',
         'otp_code',
         'otp_expires_at',
+        'is_admin',
     ];
 
     protected $hidden = [
@@ -27,6 +30,7 @@ class User extends Authenticatable implements JWTSubject
     ];
 
     protected $casts = [
+        'is_admin' => 'boolean',
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
         'otp_code' => 'string',
@@ -52,5 +56,10 @@ class User extends Authenticatable implements JWTSubject
     public function items(): HasMany
     {
         return $this->hasMany(Item::class);
+    }
+
+    public function scopeFilter(Builder $query, BaseFilter $filters): Builder
+    {
+        return $filters->apply($query);
     }
 }

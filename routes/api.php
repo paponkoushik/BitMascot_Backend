@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Inventory\InventoryController;
 use App\Http\Controllers\Item\ItemController;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Router;
 
@@ -25,9 +26,12 @@ Route::group(['prefix' => 'auth/'], function (Router $router) {
     $router->post('signup', [AuthController::class, 'signup'])
         ->name('signup');
 
-    $router->middleware('jwt.authenticate')
-        ->post('refresh', [AuthController::class, 'refresh'])
-        ->name('refresh');
+    $router->post('verify', [AuthController::class, 'verify'])
+        ->name('verify');
+//
+//    $router->middleware('jwt.authenticate')
+//        ->post('refresh', [AuthController::class, 'refresh'])
+//        ->name('refresh');
 
     $router->middleware('auth:api')
         ->get('myself', [AuthController::class, 'mySelf'])

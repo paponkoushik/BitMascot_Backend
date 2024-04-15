@@ -10,7 +10,6 @@ use App\Http\Resources\UserInfo\UserInfoResource;
 use App\Models\User;
 use App\Services\Auth\AuthService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
@@ -28,10 +27,10 @@ class AuthController extends Controller
     }
     public function verify(OtpRequest $request): JsonResponse
     {
-        return $this
-            ->service->setAttrs($request->only('email', 'otp'))
+        return $this->service
+            ->setAttrs($request->only('email', 'otp'))
             ->findUser($this->service->getAttr('email'))
-            ->verifyOTP($request->get('email'));
+            ->verifyOTP();
     }
     public function signup(SignupRequest $request): JsonResponse
     {

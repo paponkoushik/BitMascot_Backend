@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Filters\User\UserFilter;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserInfo\UserInfoResource;
 use App\Models\User;
@@ -19,9 +20,17 @@ class UserController extends Controller
         $this->service = $userService;
     }
 
-    public function index(Request $request): JsonResponse
+    public function index(UserFilter $filter)
     {
-        return $this->service->searchUsers($request);
+        $users = User::query()->filter($filter)->paginate(10);
+
+        return response()->json(['users' => $users], 200);
+//        return UserInfoResource::collection(
+//            User::query()
+//                ->where('id', '!=' $user->id)
+//                ->get()
+//        );
+//        return $this->service->searchUsers($request);
     }
 
     public function show(User $user): AnonymousResourceCollection
