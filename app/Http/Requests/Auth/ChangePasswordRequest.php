@@ -2,7 +2,15 @@
 
 namespace App\Http\Requests\Auth;
 
-class ChangePasswordRequest
-{
+use Illuminate\Foundation\Http\FormRequest;
 
+class ChangePasswordRequest extends FormRequest
+{
+    public function rules(): array
+    {
+        return [
+            'currentPassword' => 'required',
+            'newPassword' => 'required',
+        ];
+    }
 }

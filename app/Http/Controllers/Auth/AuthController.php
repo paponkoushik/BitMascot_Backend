@@ -5,13 +5,14 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\OtpRequest;
-use App\Http\Requests\SignupRequest;
+use App\Http\Requests\Auth\SignupRequest;
 use App\Http\Resources\UserInfo\UserInfoResource;
 use App\Models\User;
 use App\Services\Auth\AuthService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
+
 class AuthController extends Controller
 {
     protected $service;
