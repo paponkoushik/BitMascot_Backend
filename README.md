@@ -1,4 +1,4 @@
-# Inventory Management Backend  
+# Bit Mascotg Backend  
 ## Use PHP Version
 ```
 8.1 or avobe
