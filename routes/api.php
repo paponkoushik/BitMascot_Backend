@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\File\FileController;
 use App\Http\Controllers\Inventory\InventoryController;
 use App\Http\Controllers\Item\ItemController;
 use App\Http\Controllers\User\UserController;
@@ -45,6 +46,9 @@ Route::middleware('jwt.auth')->group(callback: function (Router $router) {
 
     $router->post('change-password', [ChangePasswordController::class, 'changePassword'])
         ->name('changePassword');
+
+    $router->get('download-file/{filename}', [FileController::class, 'downloadFile'])
+        ->name('downloadFile');
 
     Route::group(['prefix' => 'inventory/'], function (Router $router) {
         $router->get('index', [InventoryController::class, 'index'])->name('inventory.index');
