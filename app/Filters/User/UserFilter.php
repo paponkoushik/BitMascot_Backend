@@ -13,7 +13,8 @@ class UserFilter extends BaseFilter
         }
 
         return $this->builder
-            ->where('name', 'like', '%' . $str . '%')
+            ->where('first_name', 'like', '%' . $str . '%')
+            ->where('last_name', 'like', '%' . $str . '%')
             ->orWhere('email', 'like', '%' . $str . '%');
     }
 }

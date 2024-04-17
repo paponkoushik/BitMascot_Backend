@@ -50,21 +50,24 @@ Route::middleware('jwt.auth')->group(callback: function (Router $router) {
     $router->get('download-file/{filename}', [FileController::class, 'downloadFile'])
         ->name('downloadFile');
 
-    Route::group(['prefix' => 'inventory/'], function (Router $router) {
-        $router->get('index', [InventoryController::class, 'index'])->name('inventory.index');
-        $router->get('all-inventories', [InventoryController::class, 'allInventories'])->name('item.allInventories');
-        $router->post('store', [InventoryController::class, 'store'])->name('inventory.store');
-        $router->get('show/{inventory}', [InventoryController::class, 'show'])->name('inventory.show');
-        $router->put('update/{inventory}', [InventoryController::class, 'update'])->name('inventory.update');
-        $router->delete('delete/{inventory}', [InventoryController::class, 'delete'])->name('inventory.delete');
-    });
+    $router->get('users', [UserController::class, 'index'])
+        ->name('user.index');
 
-    Route::group(['prefix' => 'item/'], function (Router $router) {
-        $router->get('index', [ItemController::class, 'index'])->name('item.index');
-        $router->post('store', [ItemController::class, 'store'])->name('item.store');
-        $router->get('show/{item}', [ItemController::class, 'show'])->name('item.show');
-        $router->put('update/{item}', [ItemController::class, 'update'])->name('item.update');
-        $router->delete('delete/{item}', [ItemController::class, 'delete'])->name('item.delete');
-    });
+//    Route::group(['prefix' => 'inventory/'], function (Router $router) {
+//        $router->get('index', [InventoryController::class, 'index'])->name('inventory.index');
+//        $router->get('all-inventories', [InventoryController::class, 'allInventories'])->name('item.allInventories');
+//        $router->post('store', [InventoryController::class, 'store'])->name('inventory.store');
+//        $router->get('show/{inventory}', [InventoryController::class, 'show'])->name('inventory.show');
+//        $router->put('update/{inventory}', [InventoryController::class, 'update'])->name('inventory.update');
+//        $router->delete('delete/{inventory}', [InventoryController::class, 'delete'])->name('inventory.delete');
+//    });
+//
+//    Route::group(['prefix' => 'item/'], function (Router $router) {
+//        $router->get('index', [ItemController::class, 'index'])->name('item.index');
+//        $router->post('store', [ItemController::class, 'store'])->name('item.store');
+//        $router->get('show/{item}', [ItemController::class, 'show'])->name('item.show');
+//        $router->put('update/{item}', [ItemController::class, 'update'])->name('item.update');
+//        $router->delete('delete/{item}', [ItemController::class, 'delete'])->name('item.delete');
+//    });
 
 });

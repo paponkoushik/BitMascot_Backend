@@ -20,17 +20,14 @@ class UserController extends Controller
         $this->service = $userService;
     }
 
-    public function index(UserFilter $filter)
+    public function index(UserFilter $filter, Request $request): JsonResponse
     {
-        $users = User::query()->filter($filter)->paginate(10);
+        $users = User::query()
+            ->filter($filter)
+            ->where('id', '!=', auth()->user()->id)
+            ->paginate($request->input('per_page'));
 
         return response()->json(['users' => $users], 200);
-//        return UserInfoResource::collection(
-//            User::query()
-//                ->where('id', '!=' $user->id)
-//                ->get()
-//        );
-//        return $this->service->searchUsers($request);
     }
 
     public function show(User $user): AnonymousResourceCollection
